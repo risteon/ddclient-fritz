@@ -1,0 +1,25 @@
+services:
+  ddclient:
+    build: ./image
+    container_name: ddclient-fritzconnection
+    env_file: "fritzconnection.env"
+    user: 990:982
+    volumes:
+      - config:/config
+      - cache:/var/cache/ddclient
+      - cmd:/cmd
+    restart: unless-stopped
+
+volumes:
+  config:
+    driver: anybox/buttervolume
+    driver_opts:
+      copyonwrite: "true"
+  cache:
+    driver: anybox/buttervolume
+    driver_opts:
+      copyonwrite: "true"
+  cmd:
+    driver: anybox/buttervolume
+    driver_opts:
+      copyonwrite: "true"
